@@ -9,8 +9,7 @@ end
 bash "stop_tomcat" do
   user "root"
   code do
-    set -o nounset
-    for (( ; ; ));do java=''; java=`ps -ef | grep java | grep -vi grep | awk '{print $2}'`; if [ $java != "" ]; then pkill -15 java; else break; fi; done
+    for (( ; ; ));do java=''; java=`ps -ef | grep java | grep -vi grep | awk '{print $2}'`; if [ "$java" != "" ]; then pkill -15 java; else break; fi; done
   end
 end
 
