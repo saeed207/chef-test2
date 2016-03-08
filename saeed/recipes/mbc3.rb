@@ -14,4 +14,14 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
+execute 'deployment_finalization' do
+  command 'cp -r /usr/local/apache-tomcat/latest/opsworks-deployment/current/* /usr/local/apache-tomcat/latest/webapps/'
+  cwd "/usr/local/apache-tomcat/latest/webapps"
+ end
+
+execute 'deployment_cleanup' do
+  command 'rm -rf config log tmp public'
+  cwd "/usr/local/apache-tomcat/latest/webapps"
+ end
+
 end
