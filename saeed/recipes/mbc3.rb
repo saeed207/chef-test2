@@ -8,9 +8,9 @@ end
 
 bash "stop_tomcat" do
   user "root"
-  code do
+  code <<-EOH 
     for (( ; ; ));do java=''; java=`ps -ef | grep java | grep -vi grep | awk '{print $2}'`; if [ "$java" != "" ]; then pkill -15 java; else break; fi; done
-  end
+  EOH
 end
 
 node[:deploy].each do |application, deploy|
